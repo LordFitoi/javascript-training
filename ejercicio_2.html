@@ -54,6 +54,21 @@
             }
         }
 
+        function getLowestTriangleTypes(triangleTypesCount) {
+
+            let lowestTriangleTypeCount = Infinity;
+            let lowestTriangleType = '';
+
+            for (let type in triangleTypesCount) {
+                if (triangleTypesCount[type] < lowestTriangleTypeCount) {
+                    lowestTriangleTypeCount = triangleTypesCount[type];
+                    lowestTriangleType = type;
+                }
+            }
+            console.log(lowestTriangleType)
+            return lowestTriangleType;
+        }
+
         button.onclick = () => {
             let types = [];
             let triangleTypesCount = {
@@ -61,6 +76,7 @@
                 "Isosceles": 0,
                 "Escaleno": 0
             }
+            let lowestTriangleType = '';
 
             inputs.forEach((input) => {
                 let triangle = getTriangleType(input);
@@ -68,9 +84,11 @@
                 types.push(triangle);
             })
 
+            lowestTriangleType = getLowestTriangleTypes(triangleTypesCount);
+
             output.innerText = `
                 Resultados:
-                
+
                 Triangulo 1: ${types[0]}
                 Triangulo 2: ${types[1]}
                 Triangulo 3: ${types[2]}
@@ -80,6 +98,8 @@
                 ${triangleTypesCount.Equilatero} Equilateros
                 ${triangleTypesCount.Isosceles} Isosceles
                 ${triangleTypesCount.Escaleno} Escalenos
+
+                El triangulo con menor cantidad de tipos es: ${lowestTriangleType}
             `;
 
         }
