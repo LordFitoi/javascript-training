@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Javascript</title>
+</head>
+<body>
+    <h1>Verificar Triangulos</h1>
+    <p>Agregue las dimensiones de cada triangulo separado por coma, para verificar sus tipos.</p>
+    <h4>Triangulo 1</h4>
+    <input id="id_input_1" type="text" placeholder="12, 30, 1">
+    <h4>Triangulo 2</h4>
+    <input id="id_input_2" type="text" placeholder="12, 30, 1">
+    <h4>Triangulo 3</h4>
+    <input id="id_input_3" type="text" placeholder="12, 30, 1">
+    <h4>Triangulo 4</h4>
+    <input id="id_input_4" type="text" placeholder="12, 30, 1">
+    <button id="id_button">Verificar</button>
+    <p id="id_output"></p>
+    <style> h4 { margin-bottom: 0.25rem; } </style>
+    <script>
+        let inputs = [
+            document.getElementById('id_input_1'),
+            document.getElementById('id_input_2'),
+            document.getElementById('id_input_3'),
+            document.getElementById('id_input_4')
+        ]
+        let button = document.getElementById('id_button');
+        let output = document.getElementById('id_output');
+
+        function getTriangle(input) {
+            let values = input.value.split(',');
+            return {
+                a: parseInt(values[0]),
+                b: parseInt(values[1]),
+                c: parseInt(values[2])
+            };
+        }
+
+        function getTriangleType(input) {
+            let triangle = getTriangle(input);
+            let a = triangle.a;
+            let b = triangle.b;
+            let c = triangle.c;
+
+            if (a === b && b === c) {
+                return 'Equilatero';
+            } else if (a === b || b === c || a === c) {
+                return 'Isosceles';
+            } else {
+                return 'Escaleno';
+            }
+        }
+
+        button.onclick = () => {
+            let types = [];
+            let triangleTypesCount = {
+                "Equilatero": 0,
+                "Isosceles": 0,
+                "Escaleno": 0
+            }
+
+            inputs.forEach((input) => {
+                let triangle = getTriangleType(input);
+                triangleTypesCount[triangle]++;
+                types.push(triangle);
+            })
+
+            output.innerText = `
+                Resultados:
+                
+                Triangulo 1: ${types[0]}
+                Triangulo 2: ${types[1]}
+                Triangulo 3: ${types[2]}
+                Triangulo 4: ${types[3]}
+
+                Tipos de triangulos:
+                ${triangleTypesCount.Equilatero} Equilateros
+                ${triangleTypesCount.Isosceles} Isosceles
+                ${triangleTypesCount.Escaleno} Escalenos
+            `;
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Javascript</title>
+</head>
+<body>
+    <h1>Traductor simple</h1>
+    <p>Introduzca alguna de estas palabras para traducirlas al ingles (casa, mesa, perro, gato)</p>
+    <input type="text" placeholder="Inserte texto aqui..." id="id_input">
+    <button id="id_button">Traducir</button>
+    <p id="id_output"></p>
+    <script>
+        let textInput = document.getElementById('id_input');
+        let textOutput = document.getElementById('id_output');
+        let button = document.getElementById('id_button');
+        let translations = {
+            'casa': 'house',
+            'mesa': 'table',
+            'perro': 'dog',
+            'gato': 'cat'
+        };
+
+        button.onclick = () => {
+            textInput.value in translations
+                ? textOutput.innerText = `La traducción de "${textInput.value}" es "${translations[textInput.value]}"`
+                : textOutput.innerText = `No se ha encontrado la palabra "${textInput.value}" en las traducciones`;
+        }
+    </script>
+</body>
+</html>
